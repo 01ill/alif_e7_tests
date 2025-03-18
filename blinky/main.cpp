@@ -1,6 +1,8 @@
 #include "RTE_Components.h"
 #include CMSIS_device_header
 
+#include <stdio.h>
+
 #include "Driver_GPIO.h"
 #include "board.h"
 
@@ -11,6 +13,10 @@
 
 GET_DRIVER_REF(gpio_b, GPIO, BOARD_LEDRGB0_B_GPIO_PORT);
 GET_DRIVER_REF(gpio_r, GPIO, BOARD_LEDRGB0_R_GPIO_PORT);
+
+extern "C" {
+    int run_asm();
+} 
 
 int main (void)
 {
@@ -29,6 +35,10 @@ int main (void)
 #else
     SysTick_Config(SystemCoreClock/25);
 #endif
+
+    printf("\r\nHello World!\r\n");
+    int val = run_asm();
+    printf("\r\nHello %d\r\n", val);
 
     while (1) __WFI();
 }

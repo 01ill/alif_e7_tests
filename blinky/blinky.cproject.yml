@@ -3,7 +3,8 @@ project:
   groups:
     - group: App
       files:
-        - file: main.c
+        - file: main.cpp
+        - file: test.s
     - group: Board
       files:
         - file: ../libs/board/devkit_gen2/board_init.c
