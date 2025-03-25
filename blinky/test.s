@@ -4,3 +4,5 @@
 
 run_asm:
     mov r0, #0x10
+
+    bx lr
