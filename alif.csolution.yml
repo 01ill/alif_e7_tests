@@ -11,7 +11,7 @@ solution:
   compiler: GCC
 
   packs:
-    - pack: AlifSemiconductor::Ensemble@1.3.0
+    - pack: AlifSemiconductor::Ensemble@1.3.3
     - pack: ARM::CMSIS@6.0.0
 
   target-types:
@@ -40,3 +40,6 @@ solution:
 
   projects:
     - project: blinky/blinky.cproject.yml
+    - project: bare_metal/bare_metal.cproject.yml
+    - project: hello/hello.cproject.yml
+    - project: hello_rtt/hello_rtt.cproject.yml

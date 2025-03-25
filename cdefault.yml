@@ -5,7 +5,9 @@ default:
       C:
         - -std=c99
         - -fdata-sections
-
+      CPP:
+        - -std=c++17
+        - -fdata-sections
       Link:
         - --specs=nosys.specs
         - --entry=Reset_Handler
