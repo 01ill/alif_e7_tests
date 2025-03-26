@@ -1,7 +1,10 @@
-#include "timing.h"
-#include "Driver_Common.h"
-#include "Driver_RTC.h"
 #include <cstdint>
+extern "C" {
+    #include "Driver_Common.h"
+    #include "Driver_RTC.h"
+}
+
+#include "timing.hpp"
 
 /*
 Siehe: CMSIS Ensemble Pack -> Boards -> E7 -> Templates -> Baremetal -> RTC_Baremetal

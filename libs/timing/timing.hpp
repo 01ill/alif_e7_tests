@@ -1,3 +1,6 @@
+#ifndef TIMING_H
+#define TIMING_H
+
 #include <chrono>
 
 bool RTC_Initialize();
@@ -42,3 +45,5 @@ class RTC_Clock {
             return time_point{duration { RTC_GetTimepoint()}};
         }
 };
+
+#endif // TIMING_H
