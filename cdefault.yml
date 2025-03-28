@@ -37,6 +37,11 @@ default:
         - -std=c99
         - -fdata-sections
         - -Wno-license-management
+      CPP:
+        - -std=c++17
+        - -fdata-sections
+        - -Wno-license-management
+        - -pedantic
       Link:
         - --entry=Reset_Handler
         - --map

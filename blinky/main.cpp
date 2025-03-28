@@ -1,3 +1,4 @@
+#include <arm_mve_types.h>
 #include <cstddef>
 #include <time.h>
 
@@ -24,8 +25,8 @@ GET_DRIVER_REF(gpio_r, GPIO, BOARD_LEDRGB0_R_GPIO_PORT);
 
 extern "C" {
     int run_asm();
-    int dotp_scalar(const float * a, const float * b, float * c, int len);
-    int dotp_mve(const float * a, const float * b, float * c, int len);
+    int dotp_scalar(const float32_t * a, const float32_t * b, float32_t * c, int len);
+    int dotp_mve(const float32_t * a, const float32_t * b, float32_t * c, int len);
 } 
 
 static void uart_callback(uint32_t event) {}
@@ -60,9 +61,9 @@ int main (void)
 
     int len = 16;
     int iterations = 70000;
-    float a[len];
-    float b[len];
-    float c[len];
+    float32_t a[len];
+    float32_t b[len];
+    float32_t c[len];
     for (int i = 0; i < len; i++) {
         a[i] = i;
         b[i] = i;

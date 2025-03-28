@@ -5,9 +5,9 @@
 
     "cmake.configureOnOpen": false,
 
-    "cortex-debug.variableUseNaturalFormat": true,
+    "cortex-debug.variableUseNaturalFormat": false,
     "clangd.arguments": [
-        "--compile-commands-dir=/Users/till/Documents/Studium/Module/2025_SoSe/Tests/alif_vscode-template/out/hello_rtt/HP/debug"
+        "--compile-commands-dir=/Users/till/Documents/Studium/Module/2025_SoSe/Tests/alif_vscode-template/out/dotp_tests/HE/release"
     ],
     "python.analysis.extraPaths": [
         "/Users/till/.vcpkg/artifacts/2139c4c6/debuggers.arm.armdbg/6.4.0/sw/osgi/dbgcore.app/Contents/Eclipse/plugins/com.arm.debug.interpreter.jython.api_0.0.0.202412182131"

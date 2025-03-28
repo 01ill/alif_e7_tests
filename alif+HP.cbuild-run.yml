@@ -25,11 +25,11 @@ cbuild-run:
       type: svd
       pname: M55_HP
   output:
-    - file: out/hello_rtt/HP/debug/hello_rtt.bin
-      info: generate by hello_rtt.debug+HP
+    - file: out/dotp_tests/HP/debug/dotp_tests.bin
+      info: generate by dotp_tests.debug+HP
       type: bin
-    - file: out/hello_rtt/HP/debug/hello_rtt.elf
-      info: generate by hello_rtt.debug+HP
+    - file: out/dotp_tests/HP/debug/dotp_tests.elf
+      info: generate by dotp_tests.debug+HP
       type: elf
   system-resources:
     memory:
