@@ -30,11 +30,15 @@ bool disablePrescaler() {
     return RTCdrv->Control(ARM_RTC_SET_PRESCALER, 1);
 }
 
+// Wird für Initialisierung gebraucht. Aber sonst nicht
+void RTC_Event(uint32_t event) { }
+
+
 /**
  * Vorgehen: Initialisierung -> PowerOn -> Prescaler deaktiviern -> Counter abfragen x-mal -> PowerOff -> Uninitialize
 */
 bool RTC_Initialize() {
-    int32_t ret = RTCdrv->Initialize(NULL);
+    int32_t ret = RTCdrv->Initialize(RTC_Event);
     if (ret != ARM_DRIVER_OK) {
         return false;
     }
@@ -61,7 +65,8 @@ bool RTC_Uninitialize() {
 uint32_t RTC_GetTimepoint() {
     uint32_t val;
     int32_t ret = RTCdrv->ReadCounter(&val);
-    return ret == ARM_DRIVER_OK ? val / 3277 : 0;
+    // Umwandeln von 32768Hz in ms
+    return ret == ARM_DRIVER_OK ? (int)(val / 32.768f) : 0;
 }
 
 void RTC_Sleep(uint32_t ms) {

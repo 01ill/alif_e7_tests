@@ -37,11 +37,11 @@ bool RTC_Uninitialize();
 class RTC_Clock {
     public:
         using rep = uint32_t;
-        using period = std::micro;
+        using period = std::milli;
         using duration = std::chrono::duration<rep, period>;
-        using time_point = std::chrono::time_point<RTC_Clock>;
+        using time_point = std::chrono::time_point<RTC_Clock, duration>;
         static constexpr bool is_steady = false;
-        static time_point now() {
+        static time_point now() noexcept {
             return time_point{duration { RTC_GetTimepoint()}};
         }
 };

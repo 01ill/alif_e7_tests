@@ -1,10 +1,10 @@
+#include <arm_mve_types.h>
 #include <cstdint>
 extern "C" {
     #include "board.h"
     #include "Driver_GPIO.h"
 }
 
-#include <utility> // std::forward
 #include <chrono>
 #include "timing.hpp"
 #include "benchmark.hpp"
@@ -33,6 +33,9 @@ void setupTests() {
 
 void stopTests() {
     RTC_Uninitialize();
+    gpio_b->SetValue(BOARD_LEDRGB0_B_PIN_NO, GPIO_PIN_OUTPUT_STATE_LOW);
+    gpio_r->SetValue(BOARD_LEDRGB0_R_PIN_NO, GPIO_PIN_OUTPUT_STATE_LOW);
+
     gpio_b->Uninitialize(BOARD_LEDRGB0_B_PIN_NO);
     gpio_r->Uninitialize(BOARD_LEDRGB0_R_PIN_NO);
 }
@@ -44,16 +47,15 @@ void stopTests() {
 */
 template <typename Func, typename Result, typename A, typename B, typename C>
 uint32_t benchmark(const Func f, const uint32_t iterations, Result result, const A a, const B b, C c, const uint32_t len) {
-    RTC_Initialize();
     gpio_r->SetValue(BOARD_LEDRGB0_R_PIN_NO, GPIO_PIN_OUTPUT_STATE_HIGH);
-    auto start = RTC_Clock::now();
+    RTC_Clock::time_point start = RTC_Clock::now();
     for (uint32_t i = 0; i < iterations; i++) {
         // https://www.heise.de/blog/C-Core-Guidelines-Regeln-fuer-Variadic-Templates-4259632.html
-        result = f(a, b, c, len);
+        *c = (float32_t)i;
+        *result = f(a, b, c, len);
     }
-    auto end = RTC_Clock::now();
+    RTC_Clock::time_point end = RTC_Clock::now();
     gpio_r->SetValue(BOARD_LEDRGB0_R_PIN_NO, GPIO_PIN_OUTPUT_STATE_LOW);
-    RTC_Uninitialize();
     return std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 }
 
@@ -73,14 +75,9 @@ bool compare(T resultA, T resultB, uint32_t size) {
 // Func: uint32_t DOTP(float const*, float const*, float, uint32_t)
 // Result: int32_t
 // Arguments: float* const, float* const, float, uint32_t
-// Vector*Vector -> Scalar
+// Vector*Vector -> Scalar/Vector
 //                                     Func                                            Result   A       B       C 
-template uint32_t benchmark<uint32_t (*)(float const*, float const*, float, uint32_t), int32_t, float*, float*, float>(
-//                                         f                                           iterations result    a      b       c      len
-                            uint32_t (*)(float const*, float const*, float, uint32_t), uint32_t, int32_t, float*, float*, float, uint32_t);
+template uint32_t benchmark<float (*)(float const*, float const*, float*, uint32_t), float*, float*, float*, float*>(
+//                                         f                                         iterations result    a      b       c      len
+                            float (*)(float const*, float const*, float*, uint32_t), uint32_t, float*, float*, float*, float*, uint32_t);
 
-// Vector*Vector -> Vector
-//                                     Func                                            Result  Arguments...
-template uint32_t benchmark<uint32_t (*)(float const*, float const*, float*, uint32_t), int32_t, float*, float*, float*>(
-    //                                         f                                           iterations result    a      b       c      len
-                                uint32_t (*)(float const*, float const*, float*, uint32_t), uint32_t, int32_t, float*, float*, float*, uint32_t);
