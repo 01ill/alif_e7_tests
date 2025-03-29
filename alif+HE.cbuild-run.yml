@@ -25,11 +25,11 @@ cbuild-run:
       type: svd
       pname: M55_HE
   output:
-    - file: out/dotp_tests/HE/release/dotp_tests.bin
-      info: generate by dotp_tests.release+HE
+    - file: out/blinky/HE/debug/blinky.bin
+      info: generate by blinky.debug+HE
       type: bin
-    - file: out/dotp_tests/HE/release/dotp_tests.elf
-      info: generate by dotp_tests.release+HE
+    - file: out/blinky/HE/debug/blinky.elf
+      info: generate by blinky.debug+HE
       type: elf
   system-resources:
     memory:

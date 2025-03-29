@@ -2,7 +2,7 @@ cbuild-run:
   generated-by: csolution version 2.8.0
   solution: alif.csolution.yml
   target-type: HP
-  compiler: GCC
+  compiler: AC6
   device: Alif Semiconductor::AE722F80F55D5LS
   device-pack: AlifSemiconductor::Ensemble@1.3.3
   programming:
@@ -25,11 +25,11 @@ cbuild-run:
       type: svd
       pname: M55_HP
   output:
-    - file: out/dotp_tests/HP/debug/dotp_tests.bin
-      info: generate by dotp_tests.debug+HP
+    - file: out/test_ac6/HP/debug/test_ac6.bin
+      info: generate by test_ac6.debug+HP
       type: bin
-    - file: out/dotp_tests/HP/debug/dotp_tests.elf
-      info: generate by dotp_tests.debug+HP
+    - file: out/test_ac6/HP/debug/test_ac6.axf
+      info: generate by test_ac6.debug+HP
       type: elf
   system-resources:
     memory:

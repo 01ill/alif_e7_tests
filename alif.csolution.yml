@@ -5,6 +5,7 @@ solution:
 
   # List of tested compilers that can be selected
   select-compiler:
+    - compiler: AC6
     - compiler: GCC
 
   # Select used compiler
@@ -42,3 +43,4 @@ solution:
     - project: blinky/blinky.cproject.yml
     - project: bare_metal/bare_metal.cproject.yml
     - project: dotp_tests/dotp_tests.cproject.yml
+    - project: helium_instructions/helium_instructions.cproject.yml
