@@ -1,4 +1,3 @@
-#include <arm_mve_types.h>
 #include <cstdint>
 extern "C" {
     #include "board.h"
@@ -16,7 +15,6 @@ extern "C" {
 
 GET_DRIVER_REF(gpio_b, GPIO, BOARD_LEDRGB0_B_GPIO_PORT);
 GET_DRIVER_REF(gpio_r, GPIO, BOARD_LEDRGB0_R_GPIO_PORT);
-
 
 void setupTests() {
     RTC_Initialize();
@@ -51,8 +49,9 @@ uint32_t benchmark(const Func f, const uint32_t iterations, Result result, const
     RTC_Clock::time_point start = RTC_Clock::now();
     for (uint32_t i = 0; i < iterations; i++) {
         // https://www.heise.de/blog/C-Core-Guidelines-Regeln-fuer-Variadic-Templates-4259632.html
-        *c = (float32_t)i;
         *result = f(a, b, c, len);
+        // Ansonsten optimiert der Compiler die Assembly-Methoden weg (bei -O3)
+        asm volatile("":::"memory");
     }
     RTC_Clock::time_point end = RTC_Clock::now();
     gpio_r->SetValue(BOARD_LEDRGB0_R_PIN_NO, GPIO_PIN_OUTPUT_STATE_LOW);

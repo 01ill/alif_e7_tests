@@ -6,7 +6,7 @@ default:
         - -std=c99
         - -fdata-sections
       CPP:
-        - -std=c++17
+        - -std=c++23
         - -fdata-sections
       Link:
         - --specs=nosys.specs
@@ -38,7 +38,7 @@ default:
         - -fdata-sections
         - -Wno-license-management
       CPP:
-        - -std=c++17
+        - -std=c++23
         - -fdata-sections
         - -Wno-license-management
         - -pedantic

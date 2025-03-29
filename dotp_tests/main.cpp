@@ -77,6 +77,7 @@ float32_t dotp_scalar_intrinsic(const float32_t * a, const float32_t * b, float3
     for (uint32_t i = 0; i < len; i++) {
         sum += a[i] * b[i];
     }
+    *c = sum;
     return sum;
 }
 
@@ -93,8 +94,8 @@ int main (void)
 
     printf("\r\nHello World!\r\n");
 
-    const uint32_t len = 16;
-    const uint32_t iterations = 1;
+    const uint32_t len = 128;
+    const uint32_t iterations = 100000;
     float32_t a[len];
     float32_t b[len];
     float32_t c = 0;
@@ -122,14 +123,13 @@ int main (void)
     time = benchmark(dotp_mve_intrinsic, iterations, &result, a, b, &c, len);
     gflops = ((iterations * len * 2 * 1000.0f)  / time) / 1000000000.0f;
     printf("MVE Intrinsic (%d): %f, %f, %f\r\n", time, c, result, gflops);
-    printf("jo1");
     c = 0;
     RTC_Sleep(500);
-/*
+
     time = benchmark(dotp_scalar, iterations, &result, a, b, &c, len);
     gflops = ((iterations * len * 2 * 1000.0f)  / time) / 1000000000.0f;
     printf("ASM Scalar (%d): %f, %f, %f\r\n", time, c, result, gflops);
-    */
+
     c = 0;
     RTC_Sleep(500);
     time = benchmark(dotp_mve, iterations, &result, a, b, &c,  len);

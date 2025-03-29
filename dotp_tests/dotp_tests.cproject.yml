@@ -15,12 +15,12 @@ project:
         - file: ../libs/timing/benchmark.cpp
     - group: RTT
       files:
-        - file: ../libs/SEGGER_RTT_V796h/RTT/SEGGER_RTT.c
-        - file: ../libs/SEGGER_RTT_V796h/Syscalls/SEGGER_RTT_Syscalls_GCC.c
+        - file: ../libs/SEGGER_RTT_V820/RTT/SEGGER_RTT.c
+        - file: ../libs/SEGGER_RTT_V820/Syscalls/SEGGER_RTT_Syscalls_GCC.c
           for-compiler: GCC
-        - file: ../libs/SEGGER_RTT_V796h/Syscalls/SEGGER_RTT_Syscalls_KEIL.c
+        - file: ../libs/SEGGER_RTT_V820/Syscalls/SEGGER_RTT_Syscalls_KEIL.c
           for-compiler: AC6
-        - file: ../libs/SEGGER_RTT_V796h/Syscalls/SEGGER_RTT_Syscalls_IAR.c
+        - file: ../libs/SEGGER_RTT_V820/Syscalls/SEGGER_RTT_Syscalls_IAR.c
           for-compiler: IAR
 
   output:
@@ -36,8 +36,8 @@ project:
     - ../libs/common_app_utils/logging
     - ../libs/common_app_utils/fault_handler
     - ../libs/timing
-    - ../libs/SEGGER_RTT_V796h/RTT
-    - ../libs/SEGGER_RTT_V796h/Config
+    - ../libs/SEGGER_RTT_V820/RTT
+    - ../libs/SEGGER_RTT_V820/Config
 
   components:
     # needed for Alif Ensemble support
