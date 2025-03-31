@@ -1,13 +1,18 @@
+// #define USE_GPIO
+
 #include <cstdint>
+#ifdef USE_GPIO
 extern "C" {
     #include "board.h"
     #include "Driver_GPIO.h"
 }
+#endif
 
 #include <chrono>
 #include "timing.hpp"
 #include "benchmark.hpp"
 
+#ifdef USE_GPIO
 #define _GET_DRIVER_REF(ref, peri, chan) \
     extern ARM_DRIVER_##peri Driver_##peri##chan; \
     static ARM_DRIVER_##peri * ref = &Driver_##peri##chan;
@@ -15,9 +20,11 @@ extern "C" {
 
 GET_DRIVER_REF(gpio_b, GPIO, BOARD_LEDRGB0_B_GPIO_PORT);
 GET_DRIVER_REF(gpio_r, GPIO, BOARD_LEDRGB0_R_GPIO_PORT);
+#endif
 
 void setupTests() {
     RTC_Initialize();
+    #ifdef USE_GPIO
     gpio_b->Initialize(BOARD_LEDRGB0_B_PIN_NO, NULL);
     gpio_b->PowerControl(BOARD_LEDRGB0_B_PIN_NO, ARM_POWER_FULL);
     gpio_b->SetDirection(BOARD_LEDRGB0_B_PIN_NO, GPIO_PIN_DIRECTION_OUTPUT);
@@ -27,15 +34,18 @@ void setupTests() {
     gpio_r->PowerControl(BOARD_LEDRGB0_R_PIN_NO, ARM_POWER_FULL);
     gpio_r->SetDirection(BOARD_LEDRGB0_R_PIN_NO, GPIO_PIN_DIRECTION_OUTPUT);
     gpio_r->SetValue(BOARD_LEDRGB0_R_PIN_NO, GPIO_PIN_OUTPUT_STATE_LOW);
+    #endif
 }
 
 void stopTests() {
     RTC_Uninitialize();
+    #ifdef USE_GPIO
     gpio_b->SetValue(BOARD_LEDRGB0_B_PIN_NO, GPIO_PIN_OUTPUT_STATE_LOW);
     gpio_r->SetValue(BOARD_LEDRGB0_R_PIN_NO, GPIO_PIN_OUTPUT_STATE_LOW);
 
     gpio_b->Uninitialize(BOARD_LEDRGB0_B_PIN_NO);
     gpio_r->Uninitialize(BOARD_LEDRGB0_R_PIN_NO);
+    #endif
 }
 
 /**
@@ -45,16 +55,20 @@ void stopTests() {
 */
 template <typename Func, typename Result, typename A, typename B, typename C>
 uint32_t benchmark(const Func f, const uint32_t iterations, Result result, const A a, const B b, C c, const uint32_t len) {
+    #ifdef USE_GPIO
     gpio_r->SetValue(BOARD_LEDRGB0_R_PIN_NO, GPIO_PIN_OUTPUT_STATE_HIGH);
+    #endif
     RTC_Clock::time_point start = RTC_Clock::now();
-    for (uint32_t i = 0; i < iterations; i++) {
+    for (uint32_t i = iterations; i > 0; i--) {
         // https://www.heise.de/blog/C-Core-Guidelines-Regeln-fuer-Variadic-Templates-4259632.html
         *result = f(a, b, c, len);
         // Ansonsten optimiert der Compiler die Assembly-Methoden weg (bei -O3)
         asm volatile("":::"memory");
     }
     RTC_Clock::time_point end = RTC_Clock::now();
+    #ifdef USE_GPIO
     gpio_r->SetValue(BOARD_LEDRGB0_R_PIN_NO, GPIO_PIN_OUTPUT_STATE_LOW);
+    #endif
     return std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 }
 
@@ -79,4 +93,6 @@ bool compare(T resultA, T resultB, uint32_t size) {
 template uint32_t benchmark<float (*)(float const*, float const*, float*, uint32_t), float*, float*, float*, float*>(
 //                                         f                                         iterations result    a      b       c      len
                             float (*)(float const*, float const*, float*, uint32_t), uint32_t, float*, float*, float*, float*, uint32_t);
-
+                                
+//template uint32_t benchmark<void (*)(float const*, float const*, float*, uint32_t), float*, float*, float*, float*>(
+//                            void (*)(float const*, float const*, float*, uint32_t), uint32_t, float*, float*, float*, float*, uint32_t);

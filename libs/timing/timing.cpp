@@ -5,6 +5,7 @@ extern "C" {
 }
 
 #include "timing.hpp"
+#include "LPRTC.hpp"
 
 /*
 Siehe: CMSIS Ensemble Pack -> Boards -> E7 -> Templates -> Baremetal -> RTC_Baremetal
@@ -38,7 +39,8 @@ void RTC_Event(uint32_t event) { }
  * Vorgehen: Initialisierung -> PowerOn -> Prescaler deaktiviern -> Counter abfragen x-mal -> PowerOff -> Uninitialize
 */
 bool RTC_Initialize() {
-    int32_t ret = RTCdrv->Initialize(RTC_Event);
+    LPRTC::getInstance().enable();
+    /*int32_t ret = RTCdrv->Initialize(RTC_Event);
     if (ret != ARM_DRIVER_OK) {
         return false;
     }
@@ -51,22 +53,25 @@ bool RTC_Initialize() {
     if (ret != ARM_DRIVER_OK) {
         RTC_Uninitialize();
         return false;
-    }
+    }*/
 
     return true;
 }
 
 bool RTC_Uninitialize() {
-    powerOff();
+    LPRTC::getInstance().disable();
+    /*powerOff();
     int32_t ret = RTCdrv->Uninitialize();
-    return ret == ARM_DRIVER_OK;
+    return ret == ARM_DRIVER_OK;*/
+    return true;
 }
 
 uint32_t RTC_GetTimepoint() {
-    uint32_t val;
-    int32_t ret = RTCdrv->ReadCounter(&val);
+    /*uint32_t val;
+    int32_t ret = RTCdrv->ReadCounter(&val);*/
+    uint32_t val = LPRTC::getInstance().getCurrentValue();
     // Umwandeln von 32768Hz in ms
-    return ret == ARM_DRIVER_OK ? (int)(val / 32.768f) : 0;
+    return (int)(val / 32.768f);
 }
 
 void RTC_Sleep(uint32_t ms) {
