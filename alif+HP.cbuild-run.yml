@@ -25,11 +25,11 @@ cbuild-run:
       type: svd
       pname: M55_HP
   output:
-    - file: out/test_ac6/HP/debug/test_ac6.bin
-      info: generate by test_ac6.debug+HP
+    - file: out/rtc_driver_ac6/HP/release/rtc_driver_ac6.bin
+      info: generate by rtc_driver_ac6.release+HP
       type: bin
-    - file: out/test_ac6/HP/debug/test_ac6.axf
-      info: generate by test_ac6.debug+HP
+    - file: out/rtc_driver_ac6/HP/release/rtc_driver_ac6.axf
+      info: generate by rtc_driver_ac6.release+HP
       type: elf
   system-resources:
     memory:

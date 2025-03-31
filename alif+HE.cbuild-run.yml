@@ -2,7 +2,7 @@ cbuild-run:
   generated-by: csolution version 2.8.0
   solution: alif.csolution.yml
   target-type: HE
-  compiler: GCC
+  compiler: AC6
   device: Alif Semiconductor::AE722F80F55D5LS
   device-pack: AlifSemiconductor::Ensemble@1.3.3
   programming:
@@ -25,11 +25,11 @@ cbuild-run:
       type: svd
       pname: M55_HE
   output:
-    - file: out/blinky/HE/debug/blinky.bin
-      info: generate by blinky.debug+HE
+    - file: out/dotp_tests/HE/release/dotp_tests.bin
+      info: generate by dotp_tests.release+HE
       type: bin
-    - file: out/blinky/HE/debug/blinky.elf
-      info: generate by blinky.debug+HE
+    - file: out/dotp_tests/HE/release/dotp_tests.axf
+      info: generate by dotp_tests.release+HE
       type: elf
   system-resources:
     memory:

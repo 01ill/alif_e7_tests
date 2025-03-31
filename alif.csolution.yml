@@ -9,11 +9,13 @@ solution:
     - compiler: GCC
 
   # Select used compiler
-  compiler: GCC
+  compiler: AC6
 
   packs:
     - pack: AlifSemiconductor::Ensemble@1.3.3
     - pack: ARM::CMSIS@6.0.0
+    - pack: ARM::CMSIS-DSP@1.16.2
+    - pack: ARM::CMSIS-NN@7.0.0
 
   target-types:
     - type: HE
@@ -44,3 +46,4 @@ solution:
     - project: bare_metal/bare_metal.cproject.yml
     - project: dotp_tests/dotp_tests.cproject.yml
     - project: helium_instructions/helium_instructions.cproject.yml
+    - project: gemm_tests/gemm_tests.cproject.yml
