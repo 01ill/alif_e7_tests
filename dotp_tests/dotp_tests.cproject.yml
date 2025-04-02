@@ -43,6 +43,7 @@ project:
     # needed for Alif Ensemble support
     - component: AlifSemiconductor::Device:Startup&C Startup
     - component: ARM::CMSIS:CORE
+    - component: ARM::CMSIS:Compiler:Event Recorder
 
     # peripheral drivers & middleware, uncomment as needed
     # - component: AlifSemiconductor::Device:SOC Peripherals:ADC
@@ -70,7 +71,7 @@ project:
     # - component: AlifSemiconductor::Device:SOC Peripherals:OSPI
     # - component: AlifSemiconductor::Device:SOC Peripherals:PDM
     - component: AlifSemiconductor::Device:SOC Peripherals:PINCONF
-    - component: AlifSemiconductor::Device:SOC Peripherals:RTC
+    # - component: AlifSemiconductor::Device:SOC Peripherals:RTC
     # - component: AlifSemiconductor::Device:SOC Peripherals:SDMMC
     # - component: AlifSemiconductor::Device:SOC Peripherals:SPI
     - component: AlifSemiconductor::Device:SOC Peripherals:USART

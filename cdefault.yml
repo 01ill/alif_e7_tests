@@ -5,9 +5,11 @@ default:
       C:
         - -std=c99
         - -fdata-sections
+        - -flax-vector-conversions
       CPP:
         - -std=c++23
         - -fdata-sections
+        - -flax-vector-conversions
       Link:
         - --specs=nosys.specs
         - --entry=Reset_Handler
@@ -46,5 +48,5 @@ default:
         - --entry=Reset_Handler
         - --map
         - --verbose
-        - --info=sizes,totals,unused,summarysizes
+        - --info=architecture,sizes,totals,unused,summarysizes,stack,summarystack
         - --diag_suppress=L6312W,L6314W

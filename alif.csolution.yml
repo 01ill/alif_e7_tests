@@ -15,7 +15,8 @@ solution:
     - pack: AlifSemiconductor::Ensemble@1.3.3
     - pack: ARM::CMSIS@6.0.0
     - pack: ARM::CMSIS-DSP@1.16.2
-    - pack: ARM::CMSIS-NN@7.0.0
+#    - pack: ARM::CMSIS-NN@7.0.0
+#    - pack: ARM::CMSIS-Compiler@2.1.0
 
   target-types:
     - type: HE
