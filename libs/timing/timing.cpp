@@ -1,38 +1,7 @@
 #include <cstdint>
-extern "C" {
-    #include "Driver_Common.h"
-    #include "Driver_RTC.h"
-}
 
 #include "timing.hpp"
 #include "LPRTC.hpp"
-
-/*
-Siehe: CMSIS Ensemble Pack -> Boards -> E7 -> Templates -> Baremetal -> RTC_Baremetal
-*/
-// RTC0 ist die Standard-RTC0 Clock
-// Ist in der RTE_Device.h (RTE/Device/*/RTE_Device.h) zu finden
-// Treiber ist im CMSIS-Pack der Driver_RTC.c
-extern ARM_DRIVER_RTC Driver_RTC0;
-static ARM_DRIVER_RTC *RTCdrv = &Driver_RTC0;
-
-bool powerOn() {
-    int32_t ret = RTCdrv->PowerControl(ARM_POWER_FULL);
-    return ret == ARM_DRIVER_OK;
-}
-
-bool powerOff() {
-    int32_t ret = RTCdrv->PowerControl(ARM_POWER_OFF);
-    return ret == ARM_DRIVER_OK;
-}
-
-bool disablePrescaler() {
-    // Prescaler auf 1 setzen, damit wird er quasi deaktiviert
-    return RTCdrv->Control(ARM_RTC_SET_PRESCALER, 1);
-}
-
-// Wird für Initialisierung gebraucht. Aber sonst nicht
-void RTC_Event(uint32_t event) { }
 
 
 /**

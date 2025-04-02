@@ -129,6 +129,10 @@ SECTIONS
     *(.bss.camera_frame_bayer_to_rgb_buf) /* (Optional) Camera Frame Buffer for Bayer to RGB Conversion. */
   } > SRAM0
 
+  .bss.array_region_sram0 (NOLOAD) : {
+    *(.bss.array_region_sram0)
+  } > SRAM0
+
   .bss (NOLOAD) : ALIGN(8)
   {
     __bss_start__ = .;

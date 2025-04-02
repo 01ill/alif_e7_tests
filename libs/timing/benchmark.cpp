@@ -11,6 +11,7 @@ extern "C" {
 #include <chrono>
 #include "timing.hpp"
 #include "benchmark.hpp"
+#include "arm_math.h"
 
 #ifdef USE_GPIO
 #define _GET_DRIVER_REF(ref, peri, chan) \
@@ -59,7 +60,7 @@ uint32_t benchmark(const Func f, const uint32_t iterations, Result result, const
     gpio_r->SetValue(BOARD_LEDRGB0_R_PIN_NO, GPIO_PIN_OUTPUT_STATE_HIGH);
     #endif
     RTC_Clock::time_point start = RTC_Clock::now();
-    for (uint32_t i = iterations; i > 0; i--) {
+    for (uint32_t i = iterations; i > 0; --i) {
         // https://www.heise.de/blog/C-Core-Guidelines-Regeln-fuer-Variadic-Templates-4259632.html
         *result = f(a, b, c, len);
         // Ansonsten optimiert der Compiler die Assembly-Methoden weg (bei -O3)
@@ -69,6 +70,19 @@ uint32_t benchmark(const Func f, const uint32_t iterations, Result result, const
     #ifdef USE_GPIO
     gpio_r->SetValue(BOARD_LEDRGB0_R_PIN_NO, GPIO_PIN_OUTPUT_STATE_LOW);
     #endif
+    return std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+}
+
+template<typename Func>
+uint32_t benchmarkArm(const Func f, const uint32_t iterations, arm_status* result, arm_matrix_instance_f32 * a, arm_matrix_instance_f32 * b, arm_matrix_instance_f32 * c) {
+    RTC_Clock::time_point start = RTC_Clock::now();
+    for (uint32_t i = iterations; i > 0; --i) {
+        // https://www.heise.de/blog/C-Core-Guidelines-Regeln-fuer-Variadic-Templates-4259632.html
+        *result = f(a, b, c);
+        // Ansonsten optimiert der Compiler die Assembly-Methoden weg (bei -O3)
+        asm volatile("":::"memory");
+    }
+    RTC_Clock::time_point end = RTC_Clock::now();
     return std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 }
 
@@ -93,6 +107,7 @@ bool compare(T resultA, T resultB, uint32_t size) {
 template uint32_t benchmark<float (*)(float const*, float const*, float*, uint32_t), float*, float*, float*, float*>(
 //                                         f                                         iterations result    a      b       c      len
                             float (*)(float const*, float const*, float*, uint32_t), uint32_t, float*, float*, float*, float*, uint32_t);
-                                
 //template uint32_t benchmark<void (*)(float const*, float const*, float*, uint32_t), float*, float*, float*, float*>(
 //                            void (*)(float const*, float const*, float*, uint32_t), uint32_t, float*, float*, float*, float*, uint32_t);
+template uint32_t benchmarkArm<arm_status (*)(arm_matrix_instance_f32 const*, arm_matrix_instance_f32 const*, arm_matrix_instance_f32*)>(
+    arm_status (*)(arm_matrix_instance_f32 const*, arm_matrix_instance_f32 const*, arm_matrix_instance_f32*), uint32_t, arm_status*, arm_matrix_instance_f32*, arm_matrix_instance_f32*, arm_matrix_instance_f32*);
