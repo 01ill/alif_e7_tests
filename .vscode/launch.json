@@ -11,7 +11,7 @@
             "servertype": "jlink",
             "showDevDebugOutput": "parsed",
             "device": "${command:cmsis-csolution.getDeviceName}_${command:cmsis-csolution.getProcessorName}",
-            "interface": "jtag",
+            "interface": "swd",
             "serverArgs": ["-JLinkDevicesXmlPath", ".alif/JLinkDevices.xml"],
             "preLaunchCommands": [
                 "monitor speed 15000"

@@ -3,13 +3,21 @@ default:
   misc:
     - for-compiler: GCC
       C:
-        - -std=c99
+        - -std=c11
         - -fdata-sections
         - -flax-vector-conversions
+        - -Wall
+        - -Wextra
+        - -Wpedantic
       CPP:
         - -std=c++23
         - -fdata-sections
         - -flax-vector-conversions
+        - -fstack-usage
+        - -Wstack-usage=1KB
+        - -Wall
+        - -Wextra
+        - -Wpedantic
       Link:
         - --specs=nosys.specs
         - --entry=Reset_Handler
@@ -22,28 +30,27 @@ default:
       Library:
         - -lm -lc -lgcc
 
-    - for-compiler: IAR
-      C:
-        - -DCLOCKS_PER_SEC=1000
-        - -e
-        - --vectorize
-        - --char-is-unsigned
-        - --dlib_config normal
-
-      Link:
-        - --entry=Reset_Handler
-        - --map linker.map
-
     - for-compiler: AC6
       C:
-        - -std=c99
+        - -std=c11
         - -fdata-sections
         - -Wno-license-management
+        - -O2
+        - -Wall
+        - -Wextra
+        - -Wpedantic
+        #- -v
       CPP:
+        - -O2
         - -std=c++23
         - -fdata-sections
         - -Wno-license-management
         - -pedantic
+        - -Wall
+        - -Wextra
+        - -Wpedantic
+
+        #- -v
       Link:
         - --entry=Reset_Handler
         - --map

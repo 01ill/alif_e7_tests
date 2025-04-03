@@ -2,7 +2,7 @@ cbuild-run:
   generated-by: csolution version 2.8.0
   solution: alif.csolution.yml
   target-type: HE
-  compiler: GCC
+  compiler: AC6
   device: Alif Semiconductor::AE722F80F55D5LS
   device-pack: AlifSemiconductor::Ensemble@1.3.3
   programming:
@@ -28,7 +28,7 @@ cbuild-run:
     - file: out/gemm_tests/HE/debug/gemm_tests.bin
       info: generate by gemm_tests.debug+HE
       type: bin
-    - file: out/gemm_tests/HE/debug/gemm_tests.elf
+    - file: out/gemm_tests/HE/debug/gemm_tests.axf
       info: generate by gemm_tests.debug+HE
       type: elf
   system-resources:

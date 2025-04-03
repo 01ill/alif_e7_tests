@@ -35,7 +35,7 @@ solution:
       define:
         - _DEBUG
     - type: release
-      optimize: speed
+      optimize: balanced
       debug: on
 
   define:
@@ -48,3 +48,4 @@ solution:
     - project: dotp_tests/dotp_tests.cproject.yml
     - project: helium_instructions/helium_instructions.cproject.yml
     - project: gemm_tests/gemm_tests.cproject.yml
+    - project: stream_benchmark/stream_benchmark.cproject.yml
