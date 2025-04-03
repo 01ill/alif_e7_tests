@@ -1,5 +1,5 @@
-#ifndef TIMING_H
-#define TIMING_H
+#ifndef TIMING_HPP
+#define TIMING_HPP
 
 #include <chrono>
 
@@ -22,7 +22,7 @@ bool RTC_Initialize();
  * @return Gibt die aktuelle Zeit in ms aus dem RTC Register als unsigned 32 Bit Integer zurück.
  */
 uint32_t RTC_GetTimepoint();
-
+uint32_t RTC_GetValue();
 void RTC_Sleep(uint32_t ms);
 
 bool RTC_Uninitialize();
@@ -46,4 +46,4 @@ class RTC_Clock {
         }
 };
 
-#endif // TIMING_H
+#endif // TIMING_HPP

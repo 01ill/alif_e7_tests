@@ -39,9 +39,17 @@ class LPRTC {
             CCR.clear(LPRTC_CCR_Bits::LPRTC_PSCLR_EN);
         }
         
-        const uint32_t inline getCurrentValue() {
+        uint32_t inline getCurrentValue() const {
             return CCVR.read();
         }
 };
+
+static inline void LPRTC_Enable() {
+    LPRTC::getInstance().enable();
+}
+
+static inline uint32_t LPRTC_GetValue() {
+    return LPRTC::getInstance().getCurrentValue();
+}
 
 #endif // LPRTC_HPP

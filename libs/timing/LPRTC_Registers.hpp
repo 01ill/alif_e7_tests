@@ -33,11 +33,11 @@ class Register {
         explicit Register(AddressType base):
             reg(reinterpret_cast<volatile RegisterType*>(base + Offset)) { }
         
-        const RegisterType read() { return *reg; }
+        RegisterType read() const { return *reg; }
         void inline write(RegisterType value) { *reg = value; }
         void inline set(RegisterType mask) { *reg |= mask; }
         void inline clear(RegisterType mask) { *reg &= ~mask; }
-        const bool is_set(RegisterType mask) { return  (*reg & mask) != 0; }
+        bool is_set(RegisterType mask) const { return  (*reg & mask) != 0; }
 };
 
 #endif // LPRTC_REGISTERS_HPP

@@ -29,18 +29,17 @@ bool RTC_Initialize() {
 
 bool RTC_Uninitialize() {
     LPRTC::getInstance().disable();
-    /*powerOff();
-    int32_t ret = RTCdrv->Uninitialize();
-    return ret == ARM_DRIVER_OK;*/
     return true;
 }
 
 uint32_t RTC_GetTimepoint() {
-    /*uint32_t val;
-    int32_t ret = RTCdrv->ReadCounter(&val);*/
     uint32_t val = LPRTC::getInstance().getCurrentValue();
     // Umwandeln von 32768Hz in ms
     return (int)(val / 32.768f);
+}
+
+uint32_t RTC_GetValue() {
+    return LPRTC::getInstance().getCurrentValue();
 }
 
 void RTC_Sleep(uint32_t ms) {
