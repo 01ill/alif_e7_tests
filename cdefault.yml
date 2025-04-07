@@ -14,7 +14,7 @@ default:
         - -fdata-sections
         - -flax-vector-conversions
         - -fstack-usage
-        - -Wstack-usage=1KB
+        - -Wstack-usage=8KB
         - -Wall
         - -Wextra
         - -Wpedantic
@@ -35,13 +35,11 @@ default:
         - -std=c11
         - -fdata-sections
         - -Wno-license-management
-        - -O2
         - -Wall
         - -Wextra
         - -Wpedantic
         #- -v
       CPP:
-        - -O2
         - -std=c++23
         - -fdata-sections
         - -Wno-license-management
@@ -49,11 +47,15 @@ default:
         - -Wall
         - -Wextra
         - -Wpedantic
+        - -Weverything
 
         #- -v
       Link:
         - --entry=Reset_Handler
         - --map
         - --verbose
+        - -v
         - --info=architecture,sizes,totals,unused,summarysizes,stack,summarystack
         - --diag_suppress=L6312W,L6314W
+        - --callgraph
+        - --list=memory_usage.txt

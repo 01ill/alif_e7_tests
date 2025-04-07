@@ -4,6 +4,23 @@
 #include <cstdint>
 #include "LPRTC_Registers.hpp"
 
+namespace LPRTC_Register {
+    constexpr uintptr_t LPRTC_BASE_ADDRESS = 0x4200'0000;
+    constexpr uintptr_t CCVR_OFFSET = 0x0;
+    constexpr uintptr_t CCR_OFFSET = 0xC;
+    // HW Reference Manual v2.8, p. 211
+    constexpr uintptr_t LPRTC_VBAT_BASE_ADDRESS = 0x1A60'9000;
+    constexpr uintptr_t LPRTC_RTC_CLK_EN_OFFSET = 0x10;
+}
+
+namespace LPRTC_CCR_Bits {
+    constexpr uint32_t LPRTC_EN = (1U << 2U);
+    constexpr uint32_t LPRTC_WEN = (1U << 3U);
+    constexpr uint32_t LPRTC_PSCLR_EN = (1U << 4U);
+    // Hardware Reference Manual v2.8, p. 214
+    constexpr uint32_t LPRTC_CLK_EN = (1U << 0U);
+}
+
 
 class LPRTC {
     private:

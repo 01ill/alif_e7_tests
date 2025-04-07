@@ -93,6 +93,8 @@ SECTIONS
     LONG (SIZEOF(.bss)/4)
     LONG (ADDR(.bss.at_sram0))
     LONG (SIZEOF(.bss.at_sram0)/4)
+    LONG (ADDR(.bss.array_region_sram0))
+    LONG (SIZEOF(.bss.array_region_sram0)/4)
     __zero_table_end__ = .;
     . = ALIGN(16);
   } > MRAM
@@ -132,6 +134,11 @@ SECTIONS
   .bss.array_region_sram0 (NOLOAD) : {
     *(.bss.array_region_sram0)
   } > SRAM0
+
+  /*.data.array_region_sram1 (NOLOAD) : {
+    *(.data.array_region_sram1)
+  } > SRAM1*/
+
 
   .bss (NOLOAD) : ALIGN(8)
   {

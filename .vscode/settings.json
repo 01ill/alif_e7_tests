@@ -7,11 +7,20 @@
 
     "cortex-debug.variableUseNaturalFormat": true,
     "clangd.arguments": [
-        "--compile-commands-dir=/Users/till/Documents/Studium/Module/2025_SoSe/Tests/alif_e7_tests/out/gemm_tests/HP/release"
+        "--compile-commands-dir=/Users/till/Documents/Studium/Module/2025_SoSe/Tests/alif_e7_tests/out/stream_benchmark/HE/release"
     ],
     "python.analysis.extraPaths": [
-        "/Users/till/.vcpkg/artifacts/2139c4c6/debuggers.arm.armdbg/6.4.0/sw/osgi/dbgcore.app/Contents/Eclipse/plugins/com.arm.debug.interpreter.jython.api_0.0.0.202412182131"
+        "/Users/till/.vcpkg/artifacts/2139c4c6/debuggers.arm.armdbg/6.5.0/sw/osgi/dbgcore.app/Contents/Eclipse/plugins/com.arm.debug.interpreter.jython.api_6.5.0.202503271750"
     ],
     "peripheral-inspector.periodicRefreshMode": "while running",
     "peripheral-inspector.periodicRefreshInterval": 500,
+    "cmsis-csolution.actions": [
+        {
+            "path": "alif.csolution.yml",
+            "target": "HP",
+            "config": {
+                "debug": "Alif Ensemble Debug (Cortex-Debug)"
+            }
+        }
+    ],
 }
