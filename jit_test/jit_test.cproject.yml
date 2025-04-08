@@ -3,8 +3,7 @@ project:
   groups:
     - group: App
       files:
-        - file: stream.cpp
-        - file: stream_asm.S
+        - file: main.cpp
     - group: Board
       files:
         #- file: ../libs/board/devkit_gen2/board_init.c

@@ -25,11 +25,11 @@ cbuild-run:
       type: svd
       pname: M55_HP
   output:
-    - file: out/stream_benchmark/HP/debug/stream_benchmark.bin
-      info: generate by stream_benchmark.debug+HP
+    - file: out/jit_test/HP/debug/jit_test.bin
+      info: generate by jit_test.debug+HP
       type: bin
-    - file: out/stream_benchmark/HP/debug/stream_benchmark.axf
-      info: generate by stream_benchmark.debug+HP
+    - file: out/jit_test/HP/debug/jit_test.axf
+      info: generate by jit_test.debug+HP
       type: elf
   system-resources:
     memory:

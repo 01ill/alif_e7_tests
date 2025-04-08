@@ -55,3 +55,5 @@ solution:
     - project: helium_instructions/helium_instructions.cproject.yml
     - project: gemm_tests/gemm_tests.cproject.yml
     - project: stream_benchmark/stream_benchmark.cproject.yml
+    - project: tflm_test/tflm_test.cproject.yml
+    - project: jit_test/jit_test.cproject.yml
