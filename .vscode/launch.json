@@ -9,9 +9,9 @@
             "type": "cortex-debug",
             "runToEntryPoint": "main",
             "servertype": "jlink",
-            "showDevDebugOutput": "parsed",
+            "showDevDebugOutput": "vscode",
             "device": "${command:cmsis-csolution.getDeviceName}_${command:cmsis-csolution.getProcessorName}",
-            "interface": "swd",
+            "interface": "jtag",
             "serverArgs": ["-JLinkDevicesXmlPath", ".alif/JLinkDevices.xml"],
             "preLaunchCommands": [
                 "monitor speed 15000"

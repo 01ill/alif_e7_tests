@@ -28,10 +28,10 @@
 static void uart_callback(uint32_t event)
 { }
 
-static constexpr uint32_t arrayMaxSize = 512;
-static float32_t bigA[arrayMaxSize*arrayMaxSize] __attribute__((used, section(".bss.array_region_sram0")));
-static float32_t bigB[arrayMaxSize*arrayMaxSize] __attribute__((used, section(".bss.array_region_sram0")));
-static float32_t bigC[arrayMaxSize*arrayMaxSize] __attribute__((used, section(".bss.array_region_sram0")));
+static constexpr uint32_t arrayMaxSize = 32;
+static float32_t bigA[arrayMaxSize*arrayMaxSize]; //__attribute__((used, section(".bss.array_region_sram0")));
+static float32_t bigB[arrayMaxSize*arrayMaxSize]; //__attribute__((used, section(".bss.array_region_sram0")));
+static float32_t bigC[arrayMaxSize*arrayMaxSize]; //__attribute__((used, section(".bss.array_region_sram0")));
 
 extern "C" {
     float32_t gemm_4x6(const float32_t * a, const float32_t * b, float32_t * c, const uint32_t len_k);
@@ -74,14 +74,6 @@ int main (void)
     const uint32_t len_k = 4;
     uint32_t iterations = 10000;
 
-    float32_t aT[4 * len_k] = {
-        0, 4, 8, 12,
-        1, 5, 9, 13,
-        2, 6, 10, 14,
-        3, 7, 11, 15
-    }; // m*k
-
-
     float32_t a[4 * len_k] = {
         0, 1, 2, 3,
         4, 5, 6, 7,
@@ -112,17 +104,6 @@ int main (void)
     for (int32_t i = 0; i < 4*4; i++) {
         c[i] = 0;
     }
-    gemm_reference_4x4(a, b, c, len_k);
-    printf("C Reference 4x4: %f, %f\r\n", c[0], result);
-    for (int32_t i = 0; i < 4*4; i++) {
-        c[i] = 0;
-    }
-    RTC_Sleep(500);
-    gemm_4x4(a, b, c, len_k);
-    printf("ASM 4x4: %f, %f\r\n", c[0], result);
-    for (int32_t i = 0; i < 4*4; i++) {
-        c[i] = 0;
-    }
 
     uint32_t time;
     float32_t gflops;
@@ -142,8 +123,8 @@ int main (void)
     arm_matrix_instance_f32 armC;
     arm_status status;
 
-    for (int i = 4; i < arrayMaxSize; i = i * 2) {
-        for (int j = 0; j < i*i; j++) {
+    for (uint32_t i = 4; i <= arrayMaxSize; i = i * 2) {
+        for (uint32_t j = 0; j < i*i; j++) {
             bigA[j] = j;
             bigB[j] = j;
             bigC[j] = 0;

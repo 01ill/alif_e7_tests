@@ -2,7 +2,7 @@ cbuild-run:
   generated-by: csolution version 2.8.0
   solution: alif.csolution.yml
   target-type: HP
-  compiler: GCC
+  compiler: AC6
   device: Alif Semiconductor::AE722F80F55D5LS
   device-pack: AlifSemiconductor::Ensemble@1.3.3
   programming:
@@ -25,11 +25,11 @@ cbuild-run:
       type: svd
       pname: M55_HP
   output:
-    - file: out/stream_benchmark/HP/release/stream_benchmark.bin
-      info: generate by stream_benchmark.release+HP
+    - file: out/stream_benchmark/HP/debug/stream_benchmark.bin
+      info: generate by stream_benchmark.debug+HP
       type: bin
-    - file: out/stream_benchmark/HP/release/stream_benchmark.elf
-      info: generate by stream_benchmark.release+HP
+    - file: out/stream_benchmark/HP/debug/stream_benchmark.axf
+      info: generate by stream_benchmark.debug+HP
       type: elf
   system-resources:
     memory:
