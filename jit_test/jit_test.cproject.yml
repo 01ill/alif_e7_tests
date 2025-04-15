@@ -4,6 +4,13 @@ project:
     - group: App
       files:
         - file: main.cpp
+        - file: backend/Backend.cpp
+        - file: generators/Simple.cpp
+        - file: generators/Triad.cpp
+        - file: instructions/Arithmetic.cpp
+        - file: instructions/Base.cpp
+        - file: instructions/DataProcessing.cpp
+        - file: instructions/Vector.cpp
     - group: Board
       files:
         #- file: ../libs/board/devkit_gen2/board_init.c

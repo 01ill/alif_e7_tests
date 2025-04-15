@@ -57,3 +57,4 @@ solution:
     - project: stream_benchmark/stream_benchmark.cproject.yml
     - project: tflm_test/tflm_test.cproject.yml
     - project: jit_test/jit_test.cproject.yml
+    - project: check_features/check_features.cproject.yml

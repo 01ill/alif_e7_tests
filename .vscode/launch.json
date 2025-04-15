@@ -9,7 +9,7 @@
             "type": "cortex-debug",
             "runToEntryPoint": "main",
             "servertype": "jlink",
-            "showDevDebugOutput": "vscode",
+            "showDevDebugOutput": "parsed",
             "device": "${command:cmsis-csolution.getDeviceName}_${command:cmsis-csolution.getProcessorName}",
             "interface": "jtag",
             "serverArgs": ["-JLinkDevicesXmlPath", ".alif/JLinkDevices.xml"],

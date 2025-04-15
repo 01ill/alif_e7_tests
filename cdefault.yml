@@ -47,7 +47,8 @@ default:
         - -Wall
         - -Wextra
         - -Wpedantic
-        - -Weverything
+        - -fno-exceptions
+        #- -Weverything
 
         #- -v
       Link:

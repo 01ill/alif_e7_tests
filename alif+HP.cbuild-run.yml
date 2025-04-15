@@ -25,11 +25,11 @@ cbuild-run:
       type: svd
       pname: M55_HP
   output:
-    - file: out/jit_test/HP/debug/jit_test.bin
-      info: generate by jit_test.debug+HP
+    - file: out/gemm_tests/HP/release/gemm_tests.bin
+      info: generate by gemm_tests.release+HP
       type: bin
-    - file: out/jit_test/HP/debug/jit_test.axf
-      info: generate by jit_test.debug+HP
+    - file: out/gemm_tests/HP/release/gemm_tests.axf
+      info: generate by gemm_tests.release+HP
       type: elf
   system-resources:
     memory:
