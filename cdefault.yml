@@ -31,26 +31,22 @@ default:
         - -lm -lc -lgcc
 
     - for-compiler: AC6
-      C:
-        - -std=c11
-        - -fdata-sections
-        - -Wno-license-management
-        - -Wall
-        - -Wextra
-        - -Wpedantic
-        #- -v
-      CPP:
-        - -std=c++23
+      C-CPP:
+        - -gdwarf-5
         - -fdata-sections
         - -Wno-license-management
         - -pedantic
         - -Wall
         - -Wextra
         - -Wpedantic
-        - -fno-exceptions
         #- -Weverything
-
-        #- -v
+      C:
+        - -std=c11
+      CPP:
+        - -std=c++23
+        - -fdata-sections
+        - -fno-exceptions
+        - -ffast-math
       Link:
         - --entry=Reset_Handler
         - --map
@@ -60,3 +56,4 @@ default:
         - --diag_suppress=L6312W,L6314W
         - --callgraph
         - --list=memory_usage.txt
+        #- --datacompressor=off
