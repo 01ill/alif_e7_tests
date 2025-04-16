@@ -25,11 +25,11 @@ cbuild-run:
       type: svd
       pname: M55_HE
   output:
-    - file: out/stream_benchmark/HE/release/stream_benchmark.bin
-      info: generate by stream_benchmark.release+HE
+    - file: out/gemm_tests/HE/release/gemm_tests.bin
+      info: generate by gemm_tests.release+HE
       type: bin
-    - file: out/stream_benchmark/HE/release/stream_benchmark.axf
-      info: generate by stream_benchmark.release+HE
+    - file: out/gemm_tests/HE/release/gemm_tests.axf
+      info: generate by gemm_tests.release+HE
       type: elf
   system-resources:
     memory:

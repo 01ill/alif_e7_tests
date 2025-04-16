@@ -25,12 +25,15 @@ cbuild-run:
       type: svd
       pname: M55_HP
   output:
-    - file: out/gemm_tests/HP/release/gemm_tests.bin
-      info: generate by gemm_tests.release+HP
+    - file: out/check_features/HP/debug/check_features.bin
+      info: generate by check_features.debug+HP
       type: bin
-    - file: out/gemm_tests/HP/release/gemm_tests.axf
-      info: generate by gemm_tests.release+HP
+    - file: out/check_features/HP/debug/check_features.axf
+      info: generate by check_features.debug+HP
       type: elf
+    - file: out/check_features/HP/debug/check_features.hex
+      info: generate by check_features.debug+HP
+      type: hex
   system-resources:
     memory:
       - name: MRAM

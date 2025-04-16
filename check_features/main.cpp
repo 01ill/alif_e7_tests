@@ -1,16 +1,23 @@
 #include "RTE_Components.h"
+#include <cstdint>
 #include CMSIS_device_header
 
 #include "board.h"
 
+#include "SEGGER_RTT.h"
 
 
 int main (void)
 {
+    SEGGER_RTT_ConfigUpBuffer(0, nullptr, nullptr, 0, SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL);
 
+    uint32_t regValue;
     /* CPUID: 0xE000ED00 */
-
+    regValue = *(reinterpret_cast<volatile uint32_t *>(0xe000'ed00));
+    SEGGER_RTT_printf(0, "CPUID: %u\n", regValue);
     /* ACTLR: 0xE00E008 */
+    regValue = *(reinterpret_cast<volatile uint32_t *>(0xe000'e008));
+    SEGGER_RTT_printf(0, "ACTLR: %u\n", regValue);
 
     /* PFCR: */
 

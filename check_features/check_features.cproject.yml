@@ -4,21 +4,35 @@ project:
     - group: App
       files:
         - file: main.cpp
-    #- group: Board
-    #  files:
-        #- file: ../libs/board/devkit_gen2/board_init.c
-        #- file: ../libs/board/appkit_gen2/board_init.c
+    - group: Board
+      files:
+        - file: ../libs/board/devkit_gen2/board_init.c
+        - file: ../libs/board/appkit_gen2/board_init.c
+    - group: RTT
+      files:
+        - file: ../libs/SEGGER_RTT_V824/RTT/SEGGER_RTT.c
+        - file: ../libs/SEGGER_RTT_V824/RTT/SEGGER_RTT_printf.c
+        - file: ../libs/SEGGER_RTT_V824/Syscalls/SEGGER_RTT_Syscalls_GCC.c
+          for-compiler: GCC
+        - file: ../libs/SEGGER_RTT_V824/Syscalls/SEGGER_RTT_Syscalls_KEIL.c
+          for-compiler: AC6
+        - file: ../libs/SEGGER_RTT_V824/Syscalls/SEGGER_RTT_Syscalls_IAR.c
+          for-compiler: IAR
 
   output:
     base-name: $Project$
     type:
       - elf
       - bin
+      - hex
 
   add-path:
     - .
     - ../board/
     - ../libs/board/
+    - ../libs/SEGGER_RTT_V824/RTT
+    - ../libs/SEGGER_RTT_V824/Config
+
   components:
     # needed for Alif Ensemble support
     - component: AlifSemiconductor::Device:Startup&C Startup
@@ -33,7 +47,7 @@ project:
     # - component: AlifSemiconductor::Device:SOC Peripherals:DAC
     # - component: AlifSemiconductor::Device:SOC Peripherals:DMA
     # - component: AlifSemiconductor::Device:SOC Peripherals:Ethernet MAC
-    #- component: AlifSemiconductor::Device:SOC Peripherals:GPIO
+    - component: AlifSemiconductor::Device:SOC Peripherals:GPIO
     # - component: AlifSemiconductor::Device:SOC Peripherals:HSCMP
     # - component: AlifSemiconductor::Device:SOC Peripherals:HWSEM
     # - component: AlifSemiconductor::Device:SOC Peripherals:I2C
@@ -49,7 +63,7 @@ project:
     # - component: AlifSemiconductor::Device:SOC Peripherals:MRAM
     # - component: AlifSemiconductor::Device:SOC Peripherals:OSPI
     # - component: AlifSemiconductor::Device:SOC Peripherals:PDM
-    # - component: AlifSemiconductor::Device:SOC Peripherals:PINCONF
+    - component: AlifSemiconductor::Device:SOC Peripherals:PINCONF
     # - component: AlifSemiconductor::Device:SOC Peripherals:RTC
     # - component: AlifSemiconductor::Device:SOC Peripherals:SDMMC
     # - component: AlifSemiconductor::Device:SOC Peripherals:SPI
